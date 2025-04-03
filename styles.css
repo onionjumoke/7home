@@ -1,0 +1,184 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body with iOS 7 wallpaper */
+body {
+    background-image: url('wallpaper.jpg'); /* Replace with iOS 7 wallpaper */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow-y: hidden; /* Disable vertical scrolling */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #fff; /* White text for icon names */
+    height: 100vh;
+}
+
+/* Home screen container */
+#home-screen {
+    width: 100vw;
+    height: 100vh;
+    padding-top: 20px; /* Space for status bar */
+    overflow-y: hidden; /* Ensure no vertical scrolling */
+}
+
+/* Pages container with horizontal scrolling only */
+#pages {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden; /* Disable vertical scrolling */
+    scroll-snap-type: x mandatory;
+    width: 100%;
+    height: calc(100% - 90px); /* Leave space for dock */
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+/* Individual page with iOS 7 grid */
+.page {
+    flex: 0 0 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 28px; /* Matches iOS 7 icon spacing */
+    padding: 30px 20px; /* Adjusted padding */
+    scroll-snap-align: start;
+    justify-items: center;
+    align-content: start; /* Align items to top */
+    height: 100%; /* Fill available height */
+}
+
+/* Icon container for icon + name */
+.icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Icon styling with iOS 7 rounding */
+.icon {
+    width: 60px;
+    height: 60px;
+    background-size: cover;
+    border-radius: 13.5px; /* Exact iOS 7 corner radius */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.icon:active {
+    transform: scale(0.95); /* Press effect */
+}
+
+/* Icon name styling */
+.icon-name {
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* iOS 7 text shadow */
+    color: #fff;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Dock with iOS 7 frosted glass effect */
+#dock {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 90px; /* Exact iOS 7 dock height */
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Settings app container */
+#settings-app {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #EFEFF4; /* iOS 7 settings background */
+    overflow-y: hidden; /* Disable vertical scrolling */
+    padding-top: 20px; /* Space for status bar */
+}
+
+/* Navigation bar with iOS 7 gradient */
+.navbar {
+    background: linear-gradient(to bottom, #f9f9f9 0%, #e8e8e8 100%);
+    border-bottom: 1px solid #a6a6a6;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    height: 44px; /* iOS 7 nav bar height */
+}
+
+#back-button {
+    background: none;
+    border: none;
+    color: #007aff; /* iOS 7 blue */
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.navbar h1 {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
+    margin: 0;
+}
+
+/* Settings table view */
+.settings-content ul {
+    background: #fff;
+    border-top: 1px solid #c8c7cc;
+    border-bottom: 1px solid #c8c7cc;
+    margin: 20px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.settings-content li {
+    padding: 15px;
+    border-bottom: 1px solid #c8c7cc;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    color: #000;
+}
+
+.settings-content li:last-child {
+    border-bottom: none;
+}
+
+input {
+    border: 1px solid #c8c7cc;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#set-wallpaper {
+    background: #007aff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}

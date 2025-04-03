@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>iOS 7 Home Screen</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="home-screen">
+        <div id="pages">
+            <!-- Page 1: 9 icons with names -->
+            <div class="page">
+                <div class="icon-container">
+                    <div class="icon" data-action="settings" style="background-image: url('icons/settings.png');"></div>
+                    <span class="icon-name">Settings</span>
+                </div>
+                <div class="icon-container">
+                    <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/app1.png');"></div>
+                    <span class="icon-name">Messages</span>
+                </div>
+                <div class="icon-container">
+                    <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/app2.png');"></div>
+                    <span class="icon-name">Calendar</span>
+                </div>
+                <div class="icon-container">
+                    <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/app3.png');"></div>
+                    <span class="icon-name">Photos</span>
+                </div>
+                <div class="icon-container">
+                    <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/app4.png');"></div>
+                    <span class="icon-name">Camera</span>
+                </div>
+                <div class="icon-container">
+                    <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/app5.png');"></div>
+                    <span class="icon-name">Maps</span>
+                </div>
+                <div class="icon-container">
+                    <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/app6.png');"></div>
+                    <span class="icon-name">Clock</span>
+                </div>
+                <div class="icon-container">
+                    <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/app7.png');"></div>
+                    <span class="icon-name">Weather</span>
+                </div>
+                <div class="icon-container">
+                    <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/app8.png');"></div>
+                    <span class="icon-name">Notes</span>
+                </div>
+            </div>
+            <!-- Page 2: Additional icons with names -->
+            <div class="page">
+                <div class="icon-container">
+                    <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/app9.png');"></div>
+                    <span class="icon-name">App 9</span>
+                </div>
+                <div class="icon-container">
+                    <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/app10.png');"></div>
+                    <span class="icon-name">App 10</span>
+                </div>
+                <div class="icon-container">
+                    <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/app11.png');"></div>
+                    <span class="icon-name">App 11</span>
+                </div>
+                <div class="icon-container">
+                    <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/app12.png');"></div>
+                    <span class="icon-name">App 12</span>
+                </div>
+                <div class="icon-container">
+                    <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/app13.png');"></div>
+                    <span class="icon-name">App 13</span>
+                </div>
+                <div class="icon-container">
+                    <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/app14.png');"></div>
+                    <span class="icon-name">App 14</span>
+                </div>
+                <div class="icon-container">
+                    <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/app15.png');"></div>
+                    <span class="icon-name">App 15</span>
+                </div>
+                <div class="icon-container">
+                    <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/app16.png');"></div>
+                    <span class="icon-name">App 16</span>
+                </div>
+                <div class="icon-container">
+                    <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/app17.png');"></div>
+                    <span class="icon-name">App 17</span>
+                </div>
+            </div>
+        </div>
+        <!-- Dock: 4 icons with names -->
+        <div id="dock">
+            <div class="icon-container">
+                <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/dock1.png');"></div>
+                <span class="icon-name">Phone</span>
+            </div>
+            <div class="icon-container">
+                <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/dock2.png');"></div>
+                <span class="icon-name">Mail</span>
+            </div>
+            <div class="icon-container">
+                <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/dock3.png');"></div>
+                <span class="icon-name">Safari</span>
+            </div>
+            <div class="icon-container">
+                <div class="icon" data-url="https://placeholder.com" style="background-image: url('icons/dock4.png');"></div>
+                <span class="icon-name">Music</span>
+            </div>
+        </div>
+    </div>
+    <!-- Settings App -->
+    <div id="settings-app" style="display: none;">
+        <div class="navbar">
+            <button id="back-button">Back</button>
+            <h1>Settings</h1>
+        </div>
+        <div class="settings-content">
+            <ul>
+                <li>
+                    <label>Wallpaper URL: <input type="text" id="wallpaper-url" placeholder="Enter image URL"></label>
+                    <button id="set-wallpaper">Set</button>
+                </li>
+                <li>Credits: Created by [Your Name]</li>
+            </ul>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
