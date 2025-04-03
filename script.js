@@ -14,9 +14,24 @@ document.querySelectorAll('.icon').forEach(icon => {
 document.getElementById('back-button').addEventListener('click', () => {
     document.getElementById('settings-app').style.display = 'none';
     document.getElementById('home-screen').style.display = 'block';
+    document.getElementById('wallpaper-submenu').style.display = 'none'; // Reset submenu
 });
 
-// Handle wallpaper change
+// Handle wallpaper menu
+document.querySelector('.settings-item[data-action="wallpapers"]').addEventListener('click', () => {
+    document.querySelector('.settings-content > ul').style.display = 'none';
+    document.getElementById('wallpaper-submenu').style.display = 'block';
+});
+
+// Handle wallpaper options
+document.querySelectorAll('.wallpaper-option').forEach(option => {
+    option.addEventListener('click', () => {
+        const url = option.dataset.url;
+        document.body.style.backgroundImage = `url('${url}')`;
+    });
+});
+
+// Handle custom wallpaper
 document.getElementById('set-wallpaper').addEventListener('click', () => {
     const url = document.getElementById('wallpaper-url').value.trim();
     if (url) {

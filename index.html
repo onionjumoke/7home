@@ -118,11 +118,31 @@
         </div>
         <div class="settings-content">
             <ul>
-                <li>
-                    <label>Wallpaper URL: <input type="text" id="wallpaper-url" placeholder="Enter image URL"></label>
+                <li class="settings-item" data-action="wallpapers">
+                    <img src="icons/wallpaper-icon.png" class="settings-icon" alt="Wallpaper">
+                    <span>Wallpapers</span>
+                    <span class="chevron">&gt;</span>
+                </li>
+                <li class="settings-item">
+                    <img src="icons/credits-icon.png" class="settings-icon" alt="Credits">
+                    <span>Credits: Created by [Your Name]</span>
+                </li>
+            </ul>
+            <!-- Wallpaper Submenu -->
+            <ul id="wallpaper-submenu" style="display: none;">
+                <li class="settings-item">
+                    <button class="wallpaper-option" data-url="https://via.placeholder.com/1080x1920/FF0000">Red Wallpaper</button>
+                </li>
+                <li class="settings-item">
+                    <button class="wallpaper-option" data-url="https://via.placeholder.com/1080x1920/00FF00">Green Wallpaper</button>
+                </li>
+                <li class="settings-item">
+                    <button class="wallpaper-option" data-url="https://via.placeholder.com/1080x1920/0000FF">Blue Wallpaper</button>
+                </li>
+                <li class="settings-item">
+                    <label>Custom URL: <input type="text" id="wallpaper-url" placeholder="Enter image URL"></label>
                     <button id="set-wallpaper">Set</button>
                 </li>
-                <li>Credits: Created by [Your Name]</li>
             </ul>
         </div>
     </div>

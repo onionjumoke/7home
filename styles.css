@@ -11,9 +11,9 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    overflow-y: hidden; /* Disable vertical scrolling */
+    overflow: hidden; /* Disable all scrolling */
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #fff; /* White text for icon names */
+    color: #fff;
     height: 100vh;
 }
 
@@ -22,17 +22,17 @@ body {
     width: 100vw;
     height: 100vh;
     padding-top: 20px; /* Space for status bar */
-    overflow-y: hidden; /* Ensure no vertical scrolling */
+    overflow: hidden; /* Ensure no scrolling */
 }
 
 /* Pages container with horizontal scrolling only */
 #pages {
     display: flex;
     overflow-x: scroll;
-    overflow-y: hidden; /* Disable vertical scrolling */
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     width: 100%;
-    height: calc(100% - 90px); /* Leave space for dock */
+    height: calc(100% - 110px); /* Adjusted for elevated dock */
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
 }
@@ -42,12 +42,13 @@ body {
     flex: 0 0 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 28px; /* Matches iOS 7 icon spacing */
-    padding: 30px 20px; /* Adjusted padding */
+    grid-gap: 28px;
+    padding: 30px 20px;
     scroll-snap-align: start;
     justify-items: center;
-    align-content: start; /* Align items to top */
-    height: 100%; /* Fill available height */
+    align-content: start;
+    height: 100%;
+    overflow: hidden; /* Prevent any overflow */
 }
 
 /* Icon container for icon + name */
@@ -63,14 +64,14 @@ body {
     width: 60px;
     height: 60px;
     background-size: cover;
-    border-radius: 13.5px; /* Exact iOS 7 corner radius */
+    border-radius: 13.5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: transform 0.1s ease;
 }
 
 .icon:active {
-    transform: scale(0.95); /* Press effect */
+    transform: scale(0.95);
 }
 
 /* Icon name styling */
@@ -79,7 +80,7 @@ body {
     font-size: 12px;
     font-weight: 400;
     text-align: center;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* iOS 7 text shadow */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     color: #fff;
     max-width: 80px;
     overflow: hidden;
@@ -87,12 +88,12 @@ body {
     white-space: nowrap;
 }
 
-/* Dock with iOS 7 frosted glass effect */
+/* Dock with elevated position */
 #dock {
     position: fixed;
-    bottom: 0;
+    bottom: 20px; /* Elevated to leave space for bottom bar */
     width: 100%;
-    height: 90px; /* Exact iOS 7 dock height */
+    height: 90px;
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -109,9 +110,9 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: #EFEFF4; /* iOS 7 settings background */
-    overflow-y: hidden; /* Disable vertical scrolling */
-    padding-top: 20px; /* Space for status bar */
+    background: #EFEFF4;
+    overflow: hidden;
+    padding-top: 20px;
 }
 
 /* Navigation bar with iOS 7 gradient */
@@ -121,13 +122,13 @@ body {
     padding: 0 10px;
     display: flex;
     align-items: center;
-    height: 44px; /* iOS 7 nav bar height */
+    height: 44px;
 }
 
 #back-button {
     background: none;
     border: none;
-    color: #007aff; /* iOS 7 blue */
+    color: #007aff;
     font-size: 16px;
     font-weight: 500;
     padding: 0;
@@ -154,18 +155,39 @@ body {
     list-style: none;
 }
 
-.settings-content li {
+.settings-item {
     padding: 15px;
     border-bottom: 1px solid #c8c7cc;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     font-size: 16px;
     color: #000;
+    cursor: pointer;
 }
 
-.settings-content li:last-child {
+.settings-item:last-child {
     border-bottom: none;
+}
+
+.settings-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.chevron {
+    color: #c7c7cc;
+    margin-left: auto;
+}
+
+.wallpaper-option {
+    background: none;
+    border: none;
+    color: #007aff;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
 }
 
 input {
