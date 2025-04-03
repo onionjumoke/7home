@@ -7,14 +7,14 @@
 
 /* Body with iOS 7 wallpaper */
 body {
-    background-image: url('wallpaper.jpg'); /* Replace with iOS 7 wallpaper */
+    background-image: url('wallpaper1.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     overflow: hidden; /* Disable all scrolling */
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #fff;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 /* Home screen container */
@@ -93,7 +93,7 @@ body {
     position: fixed;
     bottom: 20px; /* Elevated to leave space for bottom bar */
     width: 100%;
-    height: 90px;
+    height: 100px;
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -101,106 +101,4 @@ body {
     justify-content: space-around;
     align-items: center;
     padding: 0 20px;
-}
-
-/* Settings app container */
-#settings-app {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #EFEFF4;
-    overflow: hidden;
-    padding-top: 20px;
-}
-
-/* Navigation bar with iOS 7 gradient */
-.navbar {
-    background: linear-gradient(to bottom, #f9f9f9 0%, #e8e8e8 100%);
-    border-bottom: 1px solid #a6a6a6;
-    padding: 0 10px;
-    display: flex;
-    align-items: center;
-    height: 44px;
-}
-
-#back-button {
-    background: none;
-    border: none;
-    color: #007aff;
-    font-size: 16px;
-    font-weight: 500;
-    padding: 0;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.navbar h1 {
-    flex-grow: 1;
-    text-align: center;
-    font-size: 18px;
-    font-weight: 500;
-    color: #000;
-    margin: 0;
-}
-
-/* Settings table view */
-.settings-content ul {
-    background: #fff;
-    border-top: 1px solid #c8c7cc;
-    border-bottom: 1px solid #c8c7cc;
-    margin: 20px 0;
-    padding: 0;
-    list-style: none;
-}
-
-.settings-item {
-    padding: 15px;
-    border-bottom: 1px solid #c8c7cc;
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    color: #000;
-    cursor: pointer;
-}
-
-.settings-item:last-child {
-    border-bottom: none;
-}
-
-.settings-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-}
-
-.chevron {
-    color: #c7c7cc;
-    margin-left: auto;
-}
-
-.wallpaper-option {
-    background: none;
-    border: none;
-    color: #007aff;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: left;
-    width: 100%;
-}
-
-input {
-    border: 1px solid #c8c7cc;
-    padding: 5px;
-    border-radius: 5px;
-}
-
-#set-wallpaper {
-    background: #007aff;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
 }
