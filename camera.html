@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>iOS 7 Camera Mock</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .top-bar {
+            height: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 2;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 25px;
+            left: 10px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 300;
+            z-index: 3;
+        }
+
+        .viewfinder {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 300;
+            line-height: 1.2;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .bottom-bar {
+            height: 94px;
+            background: rgba(30, 30, 30, 0.9);
+            border-top: 1px solid rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .shutter-container {
+            position: relative;
+            width: 78px;
+            height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shutter-ring {
+            position: absolute;
+            width: 78px;
+            height: 78px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            box-sizing: border-box;
+        }
+
+        .shutter-button {
+            width: 62px;
+            height: 62px;
+            background: radial-gradient(circle at center, #fff 60%, #e5e5e5 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .shutter-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 54px;
+            height: 54px;
+            background: #fff;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hidden-input {
+            display: none;
+        }
+
+        /* iOS 7 specific adjustments */
+        @media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+            .bottom-bar {
+                height: 94px;
+            }
+            .shutter-container {
+                width: 78px;
+                height: 78px;
+            }
+            .shutter-ring {
+                width: 78px;
+                height: 78px;
+            }
+            .shutter-button {
+                width: 62px;
+                height: 62px;
+            }
+            .shutter-button::after {
+                width: 54px;
+                height: 54px;
+            }
+        }
+
+        @media (orientation: landscape) {
+            .viewfinder {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar"></div>
+        <a href="webver.html" class="back-button">Back</a>
+        <div class="viewfinder">
+            Please tap the white button to use your camera/access your photos.
+        </div>
+        <div class="bottom-bar">
+            <label for="photo-input">
+                <div class="shutter-container">
+                    <div class="shutter-ring"></div>
+                    <div class="shutter-button"></div>
+                </div>
+            </label>
+            <input type="file" id="photo-input" class="hidden-input" accept="image/*" capture="camera">
+        </div>
+    </div>
+
+    <script>
+        // Prevent scrolling
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+    </script>
+</body>
+</html>

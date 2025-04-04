@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Calendar</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #fff;
+            overflow: hidden;
+            -webkit-user-select: none;
+            user-select: none;
+            height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #f7f7f7;
+            border-bottom: 1px solid #a6a6a6;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .back-btn, .nav-btn {
+            color: #007aff;
+            font-size: 17px;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 10px;
+            touch-action: manipulation;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .back-btn:active, .nav-btn:active {
+            color: #005bbb;
+        }
+
+        .date-display {
+            font-size: 17px;
+            font-weight: 500;
+            color: #000;
+            text-align: center;
+            flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .calendar {
+            padding: 10px 0;
+            height: calc(100% - 44px);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-size: clamp(10px, 2vw, 12px);
+            color: #666;
+            padding: 5px 0;
+            border-bottom: 1px solid #d9d9d9;
+        }
+
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-size: clamp(12px, 2.5vw, 15px);
+            color: #000;
+        }
+
+        .day {
+            padding: clamp(5px, 1.5vw, 10px) 0;
+            position: relative;
+            touch-action: manipulation;
+            height: clamp(24px, 6vw, 34px);
+            line-height: clamp(24px, 6vw, 34px);
+        }
+
+        .day.empty {
+            color: #ccc;
+        }
+
+        .day.today {
+            background: # counselingaff;
+            color: #fff;
+            border-radius: 50%;
+            width: clamp(24px, 6vw, 34px);
+            height: clamp(24px, 6vw, 34px);
+            margin: 0 auto;
+        }
+
+        .day.selected {
+            background: #e5e5e5;
+            border-radius: 50%;
+            width: clamp(24px, 6vw, 34px);
+            height: clamp(24px, 6vw, 34px);
+            margin: 0 auto;
+        }
+
+        .day:active {
+            background: #d9d9d9;
+        }
+
+        .month-year {
+            font-size: clamp(12px, 2.5vw, 14px);
+            color: #d41a26;
+            text-align: center;
+            padding: 5px 0;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="webver.html" class="back-btn">Back</a>
+            <div class="date-display"></div>
+            <div style="width: 40px;"></div> <!-- Spacer for symmetry -->
+        </div>
+        <div class="calendar">
+            <div class="nav-container">
+                <button class="nav-btn" id="prev-month">◄</button>
+                <div class="month-year"></div>
+                <button class="nav-btn" id="next-month">►</button>
+            </div>
+            <div class="weekdays">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <div class="days"></div>
+        </div>
+    </div>
+
+    <script>
+        const daysContainer = document.querySelector('.days');
+        const dateDisplay = document.querySelector('.date-display');
+        const monthYear = document.querySelector('.month-year');
+        const prevMonthBtn = document.getElementById('prev-month');
+        const nextMonthBtn = document.getElementById('next-month');
+        let selectedDate = null;
+        let currentDate = new Date();
+
+        function generateCalendar(date) {
+            const year = date.getFullYear();
+            const month = date.getMonth();
+            const today = new Date();
+            const isCurrentMonth = year === today.getFullYear() && month === today.getMonth();
+            const todayDate = isCurrentMonth ? today.getDate() : null;
+
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const startDay = firstDay.getDay();
+            const totalDays = lastDay.getDate();
+
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+            monthYear.textContent = `${monthNames[month]} ${year}`;
+            const displayDate = selectedDate ? parseInt(selectedDate.textContent) : (isCurrentMonth ? todayDate : 1);
+            const displayDay = new Date(year, month, displayDate);
+            dateDisplay.textContent = `${dayNames[displayDay.getDay()]}, ${monthNames[month]} ${displayDate}`;
+
+            daysContainer.innerHTML = '';
+
+            // Add empty days before the first day
+            for (let i = 0; i < startDay; i++) {
+                const prevMonthLastDay = new Date(year, month, 0).getDate();
+                const dayNum = prevMonthLastDay - (startDay - 1 - i);
+                const div = document.createElement('div');
+                div.className = 'day empty';
+                div.textContent = dayNum;
+                daysContainer.appendChild(div);
+            }
+
+            // Add days of the current month
+            for (let i = 1; i <= totalDays; i++) {
+                const div = document.createElement('div');
+                div.className = 'day';
+                div.textContent = i;
+                if (i === todayDate) {
+                    div.classList.add('today');
+                    if (!selectedDate) selectedDate = div;
+                }
+                div.addEventListener('touchstart', handleTouchStart);
+                div.addEventListener('click', handleClick);
+                daysContainer.appendChild(div);
+            }
+
+            // Add empty days after the last day to fill the grid
+            const remainingDays = (7 - ((startDay + totalDays) % 7)) % 7;
+            const nextMonthStart = 1;
+            for (let i = 0; i < remainingDays; i++) {
+                const div = document.createElement('div');
+                div.className = 'day empty';
+                div.textContent = nextMonthStart + i;
+                daysContainer.appendChild(div);
+            }
+
+            // Restore selected date if it exists in the new month
+            if (selectedDate) {
+                const selectedNum = parseInt(selectedDate.textContent);
+                const newSelected = Array.from(daysContainer.children).find(day => 
+                    !day.classList.contains('empty') && parseInt(day.textContent) === selectedNum
+                );
+                if (newSelected) {
+                    newSelected.classList.add('selected');
+                    selectedDate = newSelected;
+                } else {
+                    selectedDate = null;
+                }
+            }
+        }
+
+        function handleTouchStart(e) {
+            e.preventDefault();
+            selectDay(e.target);
+        }
+
+        function handleClick(e) {
+            selectDay(e.target);
+        }
+
+        function selectDay(day) {
+            if (day.classList.contains('empty')) return;
+
+            if (selectedDate) {
+                selectedDate.classList.remove('selected');
+                if (selectedDate.classList.contains('today')) {
+                    selectedDate.classList.add('today');
+                }
+            }
+
+            if (!day.classList.contains('today')) {
+                day.classList.add('selected');
+            }
+            selectedDate = day;
+
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            const dayNum = parseInt(day.textContent);
+            const selected = new Date(year, month, dayNum);
+            const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            dateDisplay.textContent = `${dayNames[selected.getDay()]}, ${monthNames[month]} ${dayNum}`;
+        }
+
+        function changeMonth(delta) {
+            currentDate.setMonth(currentDate.getMonth() + delta);
+            generateCalendar(currentDate);
+        }
+
+        // Event listeners for month navigation
+        prevMonthBtn.addEventListener('click', () => changeMonth(-1));
+        nextMonthBtn.addEventListener('click', () => changeMonth(1));
+        prevMonthBtn.addEventListener('touchstart', (e) => { e.preventDefault(); changeMonth(-1); });
+        nextMonthBtn.addEventListener('touchstart', (e) => { e.preventDefault(); changeMonth(1); });
+
+        // Initialize the calendar
+        generateCalendar(currentDate);
+
+        // Prevent default touchmove behavior to ensure smooth scrolling
+        document.addEventListener('touchmove', (e) => {
+            if (e.target.classList.contains('day')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+</body>
+</html>
